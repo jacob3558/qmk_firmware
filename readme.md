@@ -1,10 +1,11 @@
-# ZSA's fork of QMK Firmware 
+# ZSA's fork of QMK Firmware
 
 [![Current Version](https://img.shields.io/github/tag/ErgoDox-EZ/qmk_firmware.svg)](https://github.com/ErgoDox-EZ/qmk_firmware/tags)
 [![Build Status](https://travis-ci.org/ErgoDox-EZ/qmk_firmware.svg?branch=master)](https://travis-ci.org/ErgoDox-EZ/qmk_firmware)
 [![GitHub contributors](https://img.shields.io/github/contributors/ErgoDox-EZ/qmk_firmware.svg)](https://github.com/ErgoDox-EZ/qmk_firmware/pulse/monthly)
 [![GitHub forks](https://img.shields.io/github/forks/ErgoDox-EZ/qmk_firmware.svg?style=social&label=Fork)](https://github.com/ErgoDox-EZ/qmk_firmware/)
 
+<<<<<<< HEAD
 This purpose of this fork is maintain a clean repo that only contains the keyboard code that we need, and as little else as possible.  This is to keep it lightweight, since we only need a couple of keyboards. This is the repo that the EZ Configurator will pull from. 
 ## Documentation
 
@@ -14,25 +15,32 @@ The docs are powered by [Docsify](https://docsify.js.org/) and hosted on [GitHub
 
 You can request changes by making a fork and opening a [pull request](https://github.com/qmk/qmk_firmware/pulls), or by clicking the "Edit this page" link at the bottom of any page.
 
+=======
+This purpose of this fork is maintain a clean repo that only contains the keyboard code that we need, and as little else as possible. This is to keep it lightweight, since we only need a couple of keyboards. This is the repo that the EZ Configurator will pull from.
+>>>>>>> c11939000 (Add ckMoonlander Keyboard setup)
 
 ## Supported Keyboards
 
-* [ErgoDox EZ](/keyboards/ergodox_ez/)
-* [Planck EZ](/keyboards/planck/ez)
-* [Moonlander Mark I](/keyboards/moonlander)
+-   [ErgoDox EZ](/keyboards/ergodox_ez/)
+-   [Planck EZ](/keyboards/planck/ez)
+-   [Moonlander Mark I](/keyboards/moonlander)
 
 ## Building
 
 To set up the local build enviroment to create the firmware image manually, head to the [Newbs guide from QMK](https://docs.qmk.fm/#/newbs).
-And instead of using just `qmk setup`, you will want to run this instead: 
+And instead of using just `qmk setup`, you will want to run this instead:
 
 ```sh
-qmk setup zsa/qmk_firmware -b firmware20
+qmk setup chris542/qmk_firmware -b firmware20
 ```
 
 ## Maintainers
 
+<<<<<<< HEAD
 QMK is developed and maintained by Jack Humbert of OLKB with contributions from the community, and of course, [Hasu](https://github.com/tmk). The OLKB product firmwares are maintained by [Jack Humbert](https://github.com/jackhumbert), the Ergodox EZ by [ZSA Technology Labs](https://github.com/zsa), the Clueboard by [Zach White](https://github.com/skullydazed), and the Atreus by [Phil Hagelberg](https://github.com/technomancy).
+=======
+QMK is developed and maintained by Jack Humbert of OLKB with contributions from the community, and of course, [Hasu](https://github.com/tmk). The ZSA branch is maintained by Drashna, ZSA's official QMK Liaison, and by Florian Didron, ZSA's lead developer, with input from Erez Zukerman (ZSA CEO).
+>>>>>>> c11939000 (Add ckMoonlander Keyboard setup)
 
 # Update Process
 
@@ -62,7 +70,7 @@ QMK is developed and maintained by Jack Humbert of OLKB with contributions from 
     - Resolve merge conflicts, and commit.
 
 4. Commit update
-   * Include commit info in `[changelog.md](http://changelog.md)` 
+    - Include commit info in `[changelog.md](http://changelog.md)`
 5. Open Pull request, and include information about the commit
 
 ## Strategy
