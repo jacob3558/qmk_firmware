@@ -4,6 +4,8 @@
 */
 #define ORYX_CONFIGURATOR
 
+#define MOONLANDER_USER_LEDS
+
 #undef TAPPING_TERM
 #define TAPPING_TERM 150
 

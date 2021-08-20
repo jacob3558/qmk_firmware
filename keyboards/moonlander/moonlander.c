@@ -96,27 +96,23 @@ void moonlander_led_task(void) {
         }
         switch (led_mask) {
             case 1:
-            case 12:
-                ML_LED_1(true);
+                ML_LED_2(true);
+                ML_LED_5(true);
                 break;
             case 2:
-            case 11:
-                ML_LED_2(true);
+                ML_LED_1(true);
+                ML_LED_4(true);
                 break;
             case 3:
-            case 10:
                 ML_LED_3(true);
                 break;
             case 4:
-            case 9:
                 ML_LED_4(true);
                 break;
             case 5:
-            case 8:
                 ML_LED_5(true);
                 break;
             case 6:
-            case 7:
                 ML_LED_6(true);
                 break;
         }
@@ -168,7 +164,6 @@ void keyboard_pre_init_kb(void) {
     keyboard_pre_init_user();
 }
 
-#if !defined(MOONLANDER_USER_LEDS)
 layer_state_t layer_state_set_kb(layer_state_t state) {
     state = layer_state_set_user(state);
     if (is_launching || !keyboard_config.led_level) return state;
@@ -181,6 +176,7 @@ layer_state_t layer_state_set_kb(layer_state_t state) {
     ML_LED_6(false);
 
     uint8_t layer = get_highest_layer(state);
+#if !defined(MOONLANDER_USER_LEDS)
     switch (layer) {
         case 1:
             ML_LED_1(1);
@@ -206,10 +202,47 @@ layer_state_t layer_state_set_kb(layer_state_t state) {
         default:
             break;
     }
-
+#else
+    switch (layer) {
+        //Window
+        case 1:
+            ML_LED_1(1);
+            break;
+        //Game
+        case 2:
+            ML_LED_2(1);
+            break;
+        //Symb
+        case 3:
+            ML_LED_3(1);
+            break;
+        //Mouse
+        case 4:
+            ML_LED_5(1);
+            break;
+        //Numpad
+        case 5:
+            ML_LED_5(1);
+            ML_LED_6(1);
+            break;
+        //Func
+        case 6:
+            ML_LED_1(1);
+            ML_LED_3(1);
+            ML_LED_4(1);
+            ML_LED_6(1);
+            break;
+        //Arrw
+        case 7:
+            ML_LED_4(1);
+            ML_LED_5(1);
+            break;
+        default:
+            break;
+    }
+#endif
     return state;
 }
-#endif
 
 #ifdef RGB_MATRIX_ENABLE
 // clang-format off
