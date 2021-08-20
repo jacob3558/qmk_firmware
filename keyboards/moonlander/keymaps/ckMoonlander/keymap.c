@@ -195,8 +195,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
     KC_F5              , KC_F6           , KC_F7   , KC_F8   , KC_F9   , KC_F10  , KC_F11  ,
     XXXXXXX            , XXXXXXX         , XXXXXXX , XXXXXXX , XXXXXXX , XXXXXXX , KC_F12  ,
-    MU_TOG             , XXXXXXX         , RGB_HUI , RGB_HUD , RGB_SAI , XXXXXXX , XXXXXXX ,
-    XXXXXXX            , RGB_SPI         , RGB_SPD , RGB_SAD , XXXXXXX , XXXXXXX ,
+    MU_TOG             , RGB_VAI         , RGB_HUI , RGB_HUD , RGB_SAI , XXXXXXX , XXXXXXX ,
+    RGB_VAD            , RGB_SPI         , RGB_SPD , RGB_SAD , XXXXXXX , XXXXXXX ,
     TOGGLE_LAYER_COLOR , RGB_MOD         , RGB_SLD , XXXXXXX , RGB_TOG ,
     XXXXXXX            ,
     _______            , MO(ArrowsLayer) , XXXXXXX
@@ -372,7 +372,7 @@ const uint8_t PROGMEM ledmap[][DRIVER_LED_TOTAL][3] = {
         {32,176,255}, {0,0,0}, {10,225,255}, {10,225,255}, {243,222,234},
         {32,176,255}, {0,0,0}, {14,222,242}, {134,255,213}, {85,203,158},
         {32,176,255}, {0,0,0}, {10,225,255}, {134,255,213}, {180,255,233},
-        {32,176,255}, {0,0,0}, {0,0,0}, {0,0,0},
+        {32,176,255}, {0,0,0}, {32,176,255}, {32,176,255},
         {32,176,255}, {0,0,0}, {30,96,255},
         {0,0,0}, {205,255,255}, {14,255,255},
         {0,0,0}
