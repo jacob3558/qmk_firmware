@@ -20,6 +20,12 @@ And instead of using just `qmk setup`, you will want to run this instead:
 
 ```sh
 qmk setup chris542/qmk_firmware -b firmware20
+
+qmk config user.keyboard=moonlander
+qmk config user.keymap=ckMoonlander
+
+# This command will compile ckMoonlander and open the directory
+./cmp.sh
 ```
 
 ## Maintainers
