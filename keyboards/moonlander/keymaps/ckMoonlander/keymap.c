@@ -70,14 +70,16 @@ enum tap_dance_codes {
   DANCE_1,
 };
 
-#define MacbookLayer 0
-#define WindowsLayer 1
-#define GameLayer 2
-#define SymbolLayer 3
-#define MouseLayer 4
-#define NumpadLayer  5
-#define FuncLayer 6
-#define ArrowsLayer 7
+enum layers {
+    MacbookLayer,
+    WindowsLayer,
+    GameLayer,
+    SymbolLayer,
+    MouseLayer,
+    NumpadLayer,
+    FuncLayer,
+    ArrowsLayer,
+};
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   [MacbookLayer] = CK_LAYOUT(
