@@ -1,7 +1,5 @@
 echo "CK MOONLANDER COMPILING............"
-make moonlander:ckMoonlander:clean
-
-make moonlander:ckMoonlander
+make clean && make moonlander:ckMoonlander
 
 if [ -e ./.build/moonlander_ckMoonlander.bin ]; then
     cp ./.build/moonlander_ckMoonlander.bin ~/Desktop/
