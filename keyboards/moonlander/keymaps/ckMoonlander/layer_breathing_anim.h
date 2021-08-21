@@ -16,6 +16,17 @@ static HSV FILTER_BREATH(HSV hsv, bool isBreathing){
     return hsv;
 }
 
+static HSV FILTER_SAT_BAND(HSV hsv, uint8_t position, bool isSatBanding){
+    uint8_t time = scale16by8(g_rgb_timer, rgb_matrix_config.speed / 4);
+
+    int16_t s = hsv.s - abs(scale8(g_led_config.point[position].x, 228) + 28 - time) * 8;
+
+    if(isSatBanding){
+        hsv.s     = scale8(s < 0 ? 0 : s, hsv.s);
+    }
+    return hsv;
+}
+
 bool layer_breathing(effect_params_t* params) {
     RGB_MATRIX_USE_LIMITS(led_min, led_max);
 
@@ -35,6 +46,7 @@ bool layer_breathing(effect_params_t* params) {
         switch(currentLayer){
             case MacbookLayer:
                 hsv = FILTER_BREATH(hsv, isSpringGreen);
+                hsv = FILTER_SAT_BAND(hsv, m, isCyan);
                 break;
             case WindowsLayer:
                 hsv = FILTER_BREATH(hsv, isCyan);
