@@ -11,5 +11,6 @@ RGB_MATRIX_ENABLE = yes
 SRC = matrix.c
 
 #custom
+RGB_MATRIX_CUSTOM_USER = yes
 BLUETOOTH_ENABLE = no
 RAW_ENABLE = no
