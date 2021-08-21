@@ -242,19 +242,7 @@ void rgb_matrix_indicators_user(void) {
 
 // Animated Layer Colour
 layer_state_t layer_state_set_user(layer_state_t state) {
-    switch (get_highest_layer(state)) {
-        case MacbookLayer:
-            rgb_matrix_mode_noeeprom(RGB_MATRIX_CUSTOM_macbook_layer_anim);
-            break;
-
-        case FuncLayer:
-            rgb_matrix_mode_noeeprom(RGB_MATRIX_CUSTOM_func_layer_anim);
-            break;
-
-        default:
-            rgb_matrix_mode_noeeprom(RGB_MATRIX_SOLID_COLOR);
-            break;
-    }
+    rgb_matrix_mode_noeeprom(RGB_MATRIX_CUSTOM_layer_breathing);
     return state;
 }
 //END of Animated Layer Colour
