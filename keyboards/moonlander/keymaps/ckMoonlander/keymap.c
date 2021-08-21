@@ -67,8 +67,8 @@ enum custom_keycodes {
 };
 
 enum tap_dance_codes {
-  DANCE_0,
-  DANCE_1,
+  RW,
+  FF,
 };
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
@@ -175,13 +175,13 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     XXXXXXX , _______ , _______
   ),
   [FuncLayer] = CK_LAYOUT(
-    XXXXXXX , KC_F1       , KC_F2       , KC_F3      , KC_F4       , KC_F5    , KC_F6       ,
-    XXXXXXX , LALT(KC_F4) , XXXXXXX     , XXXXXXX    , XXXXXXX     , XXXXXXX  , XXXXXXX     ,
-    XXXXXXX , XXXXXXX     , VOL_DOWN    , VOL_MUTE   , VOL_UP      , BRIGHTER , WEBUSB_PAIR ,
-    XXXXXXX , XXXXXXX     , TD(DANCE_0) , PLAY_PAUSE , TD(DANCE_1) , DIMMER   ,
-    RESET   , XXXXXXX     , XXXXXXX     , XXXXXXX    , XXXXXXX     ,
+    XXXXXXX , KC_F1       , KC_F2    , KC_F3      , KC_F4   , KC_F5    , KC_F6       ,
+    XXXXXXX , LALT(KC_F4) , XXXXXXX  , XXXXXXX    , XXXXXXX , XXXXXXX  , XXXXXXX     ,
+    XXXXXXX , XXXXXXX     , VOL_DOWN , VOL_MUTE   , VOL_UP  , BRIGHTER , WEBUSB_PAIR ,
+    XXXXXXX , XXXXXXX     , TD(RW)   , PLAY_PAUSE , TD(FF)  , DIMMER   ,
+    RESET   , XXXXXXX     , XXXXXXX  , XXXXXXX    , XXXXXXX ,
     XXXXXXX ,
-    XXXXXXX , KR_HANJ     , _______     ,
+    XXXXXXX , KR_HANJ     , _______  ,
 
     KC_F5              , KC_F6           , KC_F7   , KC_F8   , KC_F9   , KC_F10  , KC_F11  ,
     XXXXXXX            , XXXXXXX         , XXXXXXX , XXXXXXX , XXXXXXX , XXXXXXX , KC_F12  ,
@@ -287,14 +287,14 @@ enum {
 static tap dance_state[2];
 
 uint8_t dance_step(qk_tap_dance_state_t *state);
-void on_dance_0(qk_tap_dance_state_t *state, void *user_data);
-void dance_0_finished(qk_tap_dance_state_t *state, void *user_data);
-void dance_0_reset(qk_tap_dance_state_t *state, void *user_data);
-void on_dance_1(qk_tap_dance_state_t *state, void *user_data);
-void dance_1_finished(qk_tap_dance_state_t *state, void *user_data);
-void dance_1_reset(qk_tap_dance_state_t *state, void *user_data);
+void on_rewind(qk_tap_dance_state_t *state, void *user_data);
+void rewind_finished(qk_tap_dance_state_t *state, void *user_data);
+void rewind_reset(qk_tap_dance_state_t *state, void *user_data);
+void on_fastforward(qk_tap_dance_state_t *state, void *user_data);
+void fastforward_finished(qk_tap_dance_state_t *state, void *user_data);
+void fastforward_reset(qk_tap_dance_state_t *state, void *user_data);
 
-void on_dance_0(qk_tap_dance_state_t *state, void *user_data) {
+void on_rewind(qk_tap_dance_state_t *state, void *user_data) {
     if(state->count == 3) {
         tap_code16(KC_MEDIA_REWIND);
         tap_code16(KC_MEDIA_REWIND);
@@ -317,7 +317,7 @@ uint8_t dance_step(qk_tap_dance_state_t *state) {
     return MORE_TAPS;
 }
 
-void dance_0_finished(qk_tap_dance_state_t *state, void *user_data) {
+void rewind_finished(qk_tap_dance_state_t *state, void *user_data) {
     dance_state[0].step = dance_step(state);
     switch (dance_state[0].step) {
         case SINGLE_TAP: register_code16(KC_MEDIA_REWIND); break;
@@ -328,7 +328,7 @@ void dance_0_finished(qk_tap_dance_state_t *state, void *user_data) {
     }
 }
 
-void dance_0_reset(qk_tap_dance_state_t *state, void *user_data) {
+void rewind_reset(qk_tap_dance_state_t *state, void *user_data) {
     wait_ms(10);
     switch (dance_state[0].step) {
         case SINGLE_TAP: unregister_code16(KC_MEDIA_REWIND); break;
@@ -340,7 +340,7 @@ void dance_0_reset(qk_tap_dance_state_t *state, void *user_data) {
     dance_state[0].step = 0;
 }
 
-void on_dance_1(qk_tap_dance_state_t *state, void *user_data) {
+void on_fastforward(qk_tap_dance_state_t *state, void *user_data) {
     if(state->count == 3) {
         tap_code16(KC_MEDIA_FAST_FORWARD);
         tap_code16(KC_MEDIA_FAST_FORWARD);
@@ -351,7 +351,7 @@ void on_dance_1(qk_tap_dance_state_t *state, void *user_data) {
     }
 }
 
-void dance_1_finished(qk_tap_dance_state_t *state, void *user_data) {
+void fastforward_finished(qk_tap_dance_state_t *state, void *user_data) {
     dance_state[1].step = dance_step(state);
     switch (dance_state[1].step) {
         case SINGLE_TAP: register_code16(KC_MEDIA_FAST_FORWARD); break;
@@ -362,7 +362,7 @@ void dance_1_finished(qk_tap_dance_state_t *state, void *user_data) {
     }
 }
 
-void dance_1_reset(qk_tap_dance_state_t *state, void *user_data) {
+void fastforward_reset(qk_tap_dance_state_t *state, void *user_data) {
     wait_ms(10);
     switch (dance_state[1].step) {
         case SINGLE_TAP: unregister_code16(KC_MEDIA_FAST_FORWARD); break;
@@ -375,7 +375,7 @@ void dance_1_reset(qk_tap_dance_state_t *state, void *user_data) {
 }
 
 qk_tap_dance_action_t tap_dance_actions[] = {
-    [DANCE_0] = ACTION_TAP_DANCE_FN_ADVANCED(on_dance_0, dance_0_finished, dance_0_reset),
-    [DANCE_1] = ACTION_TAP_DANCE_FN_ADVANCED(on_dance_1, dance_1_finished, dance_1_reset),
+    [RW] = ACTION_TAP_DANCE_FN_ADVANCED(on_rewind, rewind_finished, rewind_reset),
+    [FF] = ACTION_TAP_DANCE_FN_ADVANCED(on_fastforward, fastforward_finished, fastforward_reset),
 };
 
