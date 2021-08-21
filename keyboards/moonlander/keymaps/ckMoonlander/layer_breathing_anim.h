@@ -11,7 +11,7 @@ static HSV FILTER_BREATH(HSV hsv, bool isBreathing){
     if(isBreathing){
         hsv.v = scale8(abs8(sin8(time) - 128) * 2, rgb_matrix_config.hsv.v);
     } else {
-        hsv.v = rgb_matrix_config.hsv.v;
+        if(hsv.v) hsv.v = rgb_matrix_config.hsv.v;
     }
     return hsv;
 }
@@ -51,6 +51,7 @@ bool layer_breathing(effect_params_t* params) {
                 hsv = FILTER_BREATH(hsv, isChartReuse);
                 break;
             default:
+                if(hsv.v) hsv.v = rgb_matrix_config.hsv.v;
                 break;
         }
 
