@@ -88,7 +88,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     KC_LCTL       , KC_A         , KC_S          , KC_D    , KC_F    , KC_G , M_PRV_TAB ,
     KC_LSFT       , KC_Z         , KC_X          , KC_C    , KC_V    , KC_B ,
     LSFT(KC_LCTL) , XXXXXXX      , LALT(KC_LGUI) , KC_LALT , KC_LGUI ,
-    TG(GameLayer) ,
+                    TG(GameLayer),
     KC_SPC        , LGUI(KC_SPC) , MO(FuncLayer) ,
 
     KC_5             , KC_6           , KC_7            , KC_8   , KC_9    , KC_0    , KC_BSPC  ,
@@ -96,7 +96,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     M_NXT_TAB        , KC_H           , KC_J            , KC_K   , KC_L    , KC_SCLN , KC_ENTER ,
     KC_N             , KC_M           , KC_COMM         , KC_DOT , KC_SLSH , KC_RSFT ,
     KC_QUOT          , KC_LEFT        , KC_DOWN         , KC_UP  , KC_RGHT ,
-    TG(WindowsLayer) ,
+                       TG(WindowsLayer),
     MO(FuncLayer)    , MO(MouseLayer) , MO(SymbolLayer)
   )                              ,
   [WindowsLayer] = CK_LAYOUT(
@@ -105,7 +105,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     _______ , _______ , _______       , _______ , _______ , _______ , W_PRV_TAB ,
     _______ , _______ , _______       , _______ , _______ , _______ ,
     _______ , XXXXXXX , LALT(KC_LGUI) , KC_LGUI , KC_LALT ,
-    _______ ,
+              _______ ,
     _______ , KR_HAEN , _______       ,
 
     _______   , _______ , _______ , _______ , _______ , _______ , KC_BSPC ,
@@ -113,7 +113,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     W_NXT_TAB , _______ , _______ , _______ , _______ , _______ , _______ ,
     _______   , _______ , _______ , _______ , _______ , _______ ,
     _______   , _______ , _______ , _______ , _______ ,
-    _______   ,
+                _______ ,
     _______   , _______ , _______
   ),
   [GameLayer] = CK_LAYOUT(
@@ -122,7 +122,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     _______ , _______ , _______ , _______ , _______ , _______ , KC_GRV  ,
     _______ , _______ , _______ , _______ , _______ , _______ ,
     KC_LCTL , XXXXXXX , XXXXXXX , KC_LGUI , KC_LALT ,
-    _______ ,
+              _______ ,
     KC_SPC  , _______ , _______ ,
 
     _______ , _______ , _______ , _______ , _______ , _______ , _______ ,
@@ -130,7 +130,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     _______ , _______ , _______ , _______ , _______ , _______ , _______ ,
     _______ , _______ , _______ , KC_UP   , _______ , _______ ,
     XXXXXXX , KC_LEFT , KC_DOWN , KC_RGHT , XXXXXXX ,
-    _______ ,
+              _______ ,
     _______ , _______ , _______
   ),
   [SymbolLayer] = CK_LAYOUT(
@@ -139,7 +139,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     _______ , XXXXXXX , KC_PIPE , KC_TILD , KC_AMPR , XXXXXXX , XXXXXXX ,
     _______ , XXXXXXX , XXXXXXX , XXXXXXX , XXXXXXX , XXXXXXX ,
     _______ , XXXXXXX , XXXXXXX , KC_LALT , KC_LGUI ,
-    _______ ,
+              _______ ,
     _______ , _______ , _______ ,
 
     KC_DELETE , XXXXXXX         , XXXXXXX , XXXXXXX , XXXXXXX , XXXXXXX , KC_BSPC ,
@@ -147,25 +147,25 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     XXXXXXX   , KC_MINS         , KC_LCBR , KC_LABK , KC_RABK , KC_EQL  , XXXXXXX ,
     KC_UNDS   , KC_RCBR         , KC_ASTR , KC_BSLS , KC_QUES , _______ ,
     KC_GRV    , XXXXXXX         , XXXXXXX , XXXXXXX , XXXXXXX ,
-    _______   ,
+                _______         ,
     XXXXXXX   , MO(NumpadLayer) , _______
   ),
   [MouseLayer] = CK_LAYOUT(
-    XXXXXXX         , KC_MS_ACCEL0 , KC_MS_ACCEL1    , KC_MS_ACCEL2 , XXXXXXX        , XXXXXXX    , XXXXXXX ,
-    XXXXXXX         , XXXXXXX      , XXXXXXX         , XXXXXXX      , XXXXXXX        , XXXXXXX    , XXXXXXX ,
-    KC_LCTL         , XXXXXXX      , XXXXXXX         , XXXXXXX      , XXXXXXX        , XXXXXXX    , XXXXXXX ,
-    KC_LSFT         , XXXXXXX      , XXXXXXX         , XXXXXXX      , XXXXXXX        , XXXXXXX    ,
-    XXXXXXX         , XXXXXXX      , KC_LALT         , KC_LGUI      , XXXXXXX        ,
-    LSFT(KC_LCTL)   ,
-    XXXXXXX         , XXXXXXX      , XXXXXXX         ,
+    _______       , XXXXXXX , XXXXXXX  , XXXXXXX , XXXXXXX , XXXXXXX , XXXXXXX ,
+    _______       , XXXXXXX , XXXXXXX  , XXXXXXX , XXXXXXX , XXXXXXX , XXXXXXX ,
+    KC_LCTL       , XXXXXXX , XXXXXXX  , XXXXXXX , XXXXXXX , XXXXXXX , XXXXXXX ,
+    KC_LSFT       , XXXXXXX , XXXXXXX  , XXXXXXX , XXXXXXX , XXXXXXX ,
+    LSFT(KC_LCTL) , XXXXXXX , XXXXXXX  , KC_LALT , KC_LGUI ,
+                    XXXXXXX ,
+    _______       , XXXXXXX , XXXXXXX  ,
 
-    XXXXXXX         , XXXXXXX      , XXXXXXX         , XXXXXXX      , XXXXXXX        , XXXXXXX    , XXXXXXX ,
-    XXXXXXX         , XXXXXXX      , KC_MS_WH_LEFT   , KC_MS_UP     , KC_MS_WH_RIGHT , XXXXXXX    , XXXXXXX ,
-    XXXXXXX         , KC_MS_BTN1   , KC_MS_LEFT      , KC_MS_DOWN   , KC_MS_RIGHT    , KC_MS_BTN2 , XXXXXXX ,
-    KC_MS_BTN3      , KC_MS_WH_UP  , KC_MS_WH_DOWN   , XXXXXXX      , XXXXXXX        , XXXXXXX    ,
-    XXXXXXX         , XXXXXXX      , XXXXXXX         , XXXXXXX      , XXXXXXX        ,
-    XXXXXXX         ,
-    MO(ArrowsLayer) , _______      , MO(NumpadLayer)
+    XXXXXXX         , XXXXXXX     , XXXXXXX         , XXXXXXX    , XXXXXXX        , XXXXXXX      , XXXXXXX ,
+    XXXXXXX         , XXXXXXX     , KC_MS_WH_LEFT   , KC_MS_UP   , KC_MS_WH_RIGHT , XXXXXXX      , XXXXXXX ,
+    XXXXXXX         , KC_MS_WH_UP , KC_MS_LEFT      , KC_MS_DOWN , KC_MS_RIGHT    , KC_MS_ACCEL0 , XXXXXXX ,
+                      KC_MS_WH_DOWN, KC_MS_BTN1     , KC_MS_BTN3 , KC_MS_BTN2     , XXXXXXX      , XXXXXXX ,
+    XXXXXXX         , XXXXXXX     , XXXXXXX         , XXXXXXX    , XXXXXXX        ,
+                      XXXXXXX     ,
+    MO(ArrowsLayer) , _______     , MO(NumpadLayer)
   ),
   [NumpadLayer] = CK_LAYOUT(
     _______ , _______ , _______ , _______ , _______ , _______ , _______ ,
@@ -173,15 +173,15 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     _______ , _______ , _______ , _______ , _______ , _______ , _______ ,
     _______ , _______ , _______ , _______ , _______ , _______ ,
     _______ , _______ , _______ , _______ , _______ ,
-    _______ ,
+              _______ ,
     _______ , _______ , _______ ,
 
     XXXXXXX , XXXXXXX , KC_NLCK , KC_PSLS , KC_PAST , KC_PMNS , KC_BSPC ,
     XXXXXXX , XXXXXXX , KC_P7   , KC_P8   , KC_P9   , KC_PPLS , XXXXXXX ,
     XXXXXXX , XXXXXXX , KC_P4   , KC_P5   , KC_P6   , KC_PENT , XXXXXXX ,
-    XXXXXXX , KC_P1   , KC_P2   , KC_P3   , XXXXXXX , XXXXXXX ,
-    KC_P0   , KC_PDOT , XXXXXXX , XXXXXXX , XXXXXXX ,
-    _______ ,
+              XXXXXXX , KC_P1   , KC_P2   , KC_P3   , XXXXXXX , XXXXXXX ,
+                        KC_P0   , KC_PDOT , XXXXXXX , XXXXXXX , XXXXXXX ,
+              _______ ,
     XXXXXXX , _______ , _______
   ),
   [FuncLayer] = CK_LAYOUT(
@@ -314,9 +314,9 @@ const uint8_t PROGMEM ledmap[][DRIVER_LED_TOTAL][3] = {
 
     [MouseLayer] = {
         {0,0,0}, {0,0,0}, {146,224,255}, {146,224,255}, {169,120,255},
-        {195,61,255}, {0,0,0}, {0,0,0}, {0,0,0}, {0,0,0},
-        {195,61,255}, {0,0,0}, {0,0,0}, {0,0,0}, {0,0,0},
-        {195,61,255}, {0,0,0}, {0,0,0}, {0,0,0}, {146,224,255},
+        {0,0,0}, {0,0,0}, {0,0,0}, {0,0,0}, {0,0,0},
+        {0,0,0}, {0,0,0}, {0,0,0}, {0,0,0}, {0,0,0},
+        {0,0,0}, {0,0,0}, {0,0,0}, {0,0,0}, {146,224,255},
         {0,0,0}, {0,0,0}, {0,0,0}, {0,0,0}, {146,224,255},
         {0,0,0}, {0,0,0}, {0,0,0}, {0,0,0},
         {0,0,0}, {0,0,0}, {0,0,0},
@@ -324,11 +324,11 @@ const uint8_t PROGMEM ledmap[][DRIVER_LED_TOTAL][3] = {
         {0,0,0},
 
         {0,0,0}, {0,0,0}, {0,0,0}, {0,0,0}, {0,0,0},
-        {0,0,0}, {0,0,0}, {154,86,255}, {0,0,0}, {0,0,0},
-        {0,0,0}, {252,119,255}, {20,177,225}, {0,0,0}, {0,0,0},
-        {0,0,0}, {20,177,225}, {20,177,225}, {252,119,255}, {0,0,0},
-        {0,0,0}, {252,119,255}, {20,177,225}, {252,119,255}, {0,0,0},
-        {0,0,0}, {0,0,0}, {154,86,255}, {154,86,255},
+        {0,0,0}, {0,0,0}, {195,61,255}, {0,0,0}, {0,0,0},
+        {0,0,0}, {252,119,255}, {20,177,225}, {154,86,255}, {0,0,0},
+        {0,0,0}, {20,177,225}, {20,177,225}, {154,86,255}, {0,0,0},
+        {0,0,0}, {252,119,255}, {20,177,225}, {154,86,255}, {0,0,0},
+        {0,0,0}, {0,0,0}, {252,119,255}, {252,119,255},
         {0,0,0}, {0,0,0}, {0,0,0},
         {205,255,255}, {233,218,217}, {205,255,255},
         {0,0,0}
