@@ -214,7 +214,7 @@ layer_state_t layer_state_set_kb(layer_state_t state) {
             break;
         //Symb
         case 3:
-            ML_LED_3(1);
+            ML_LED_6(1);
             break;
         //Mouse
         case 4:
@@ -227,10 +227,8 @@ layer_state_t layer_state_set_kb(layer_state_t state) {
             break;
         //Func
         case 6:
-            ML_LED_1(1);
             ML_LED_3(1);
             ML_LED_4(1);
-            ML_LED_6(1);
             break;
         //Arrw
         case 7:
