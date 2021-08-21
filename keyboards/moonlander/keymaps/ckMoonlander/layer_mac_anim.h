@@ -24,4 +24,3 @@ RGB_MATRIX_EFFECT(macbook_layer_anim)
     }
 
 #    endif  // RGB_MATRIX_CUSTOM_EFFECT_IMPLS
-
