@@ -16,13 +16,37 @@ static HSV FILTER_BREATH(HSV hsv, bool isBreathing){
     return hsv;
 }
 
-static HSV FILTER_SAT_BAND(HSV hsv, uint8_t position, bool isSatBanding){
+static HSV FILTER_VAL_BAND(HSV hsv, uint8_t position, bool isSatBanding, bool isVertical){
     uint8_t time = scale16by8(g_rgb_timer, rgb_matrix_config.speed / 4);
-
-    int16_t s = hsv.s - abs(scale8(g_led_config.point[position].x, 228) + 28 - time) * 8;
-
     if(isSatBanding){
-        hsv.s     = scale8(s < 0 ? 0 : s, hsv.s);
+        if(isVertical){
+            int16_t v = hsv.v - abs(scale8(g_led_config.point[position].y, 228) + 28 - time) * 8;
+            hsv.v = scale8(v < 0 ? 0 : v, hsv.v);
+        } else {
+            int16_t v = hsv.v - abs(scale8(g_led_config.point[position].x, 228) + 28 - time) * 8;
+            hsv.v = scale8(v < 0 ? 0 : v, hsv.v);
+        }
+    }
+    return hsv;
+}
+
+static HSV FILTER_CROSS_SPLASH(HSV hsv, uint8_t position, bool isSplashing){
+    uint8_t count = g_last_hit_tracker.count;
+    if(isSplashing){
+        for (uint8_t j = 0; j < count; j++) {
+            int16_t  dx   = g_led_config.point[position].x - g_last_hit_tracker.x[j];
+            int16_t  dy   = g_led_config.point[position].y - g_last_hit_tracker.y[j];
+            uint8_t  dist = sqrt16(dx * dx + dy * dy);
+            uint16_t tick = scale16by8(g_last_hit_tracker.tick[j], rgb_matrix_config.speed);
+            uint16_t effect = tick + dist;
+            dx              = dx < 0 ? dx * -1 : dx;
+            dy              = dy < 0 ? dy * -1 : dy;
+            dx              = dx * 16 > 255 ? 255 : dx * 16;
+            dy              = dy * 16 > 255 ? 255 : dy * 16;
+            effect += dx > dy ? dy : dx;
+            if (effect > 255) effect = 255;
+            hsv.v = qadd8(hsv.v, 255 - effect);
+        }
     }
     return hsv;
 }
@@ -37,21 +61,34 @@ bool layer_breathing(effect_params_t* params) {
             .s   = pgm_read_byte(&ledmap[currentLayer][m][1]),
             .v   = pgm_read_byte(&ledmap[currentLayer][m][2]),
         };
+        bool isVertical = true;
         bool isSpringGreen = hsv.h == 106 && hsv.s == 255 && hsv.v == 255;
         bool isCyan = hsv.h == 128 && hsv.s == 255 && hsv.v == 255;
         bool isGold = hsv.h == 36 && hsv.s == 255 && hsv.v == 255;
         bool isAzure = hsv.h == 132 && hsv.s == 102 && hsv.v == 255;
+        bool isOrange= hsv.h== 28 && hsv.s == 255 && hsv.v == 255;
         bool isChartReuse = hsv.h == 64 && hsv.s == 255 && hsv.v == 255;
 
+        //BREATH/VAL_BAND
+        //THEN USE REACTIVE CROSS
         switch(currentLayer){
             case MacbookLayer:
-                hsv = FILTER_BREATH(hsv, isSpringGreen);
-                hsv = FILTER_SAT_BAND(hsv, m, isCyan);
+                hsv = FILTER_VAL_BAND(hsv, m, isSpringGreen, !isVertical);
+                hsv = FILTER_BREATH(hsv, m==0);
+                hsv = FILTER_CROSS_SPLASH(hsv, m, isSpringGreen || m == 0);
                 break;
             case WindowsLayer:
-                hsv = FILTER_BREATH(hsv, isCyan);
+                hsv = FILTER_VAL_BAND(hsv, m, isCyan, !isVertical);
+                hsv = FILTER_BREATH(hsv, m==0);
+                hsv = FILTER_CROSS_SPLASH(hsv, m, isCyan || m == 0);
                 break;
             case GameLayer:
+                hsv = FILTER_BREATH(hsv, isGold || isOrange || m == 0);
+                hsv = FILTER_CROSS_SPLASH(hsv, m, isGold);
+                break;
+            case SymbolLayer:
+                hsv = FILTER_CROSS_SPLASH(hsv, m, true);
+                break;
             case MouseLayer:
             case ArrowsLayer:
                 hsv = FILTER_BREATH(hsv, isGold);
