@@ -132,11 +132,11 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
               _______ ,
     _______ , _______ , _______ ,
 
-    KC_DELETE , XXXXXXX         , XXXXXXX , XXXXXXX , XXXXXXX , XXXXXXX , KC_BSPC ,
-    XXXXXXX   , XXXXXXX         , KC_PLUS , KC_LPRN , KC_RPRN , KC_LBRC , KC_RBRC ,
-    XXXXXXX   , KC_MINS         , KC_LCBR , KC_LABK , KC_RABK , KC_EQL  , XXXXXXX ,
-    KC_UNDS   , KC_RCBR         , KC_ASTR , KC_BSLS , KC_QUES , _______ ,
-    KC_GRV    , XXXXXXX         , XXXXXXX , XXXXXXX , XXXXXXX ,
+    KC_DELETE , XXXXXXX , XXXXXXX , XXXXXXX , XXXXXXX , XXXXXXX , KC_BSPC ,
+    XXXXXXX   , XXXXXXX , KC_PLUS , KC_LPRN , KC_RPRN , XXXXXXX , XXXXXXX ,
+    XXXXXXX   , KC_MINS , KC_ASTR , KC_LBRC , KC_RBRC , KC_EQL  , XXXXXXX ,
+                KC_UNDS , KC_BSLS , KC_LABK , KC_RABK , KC_QUES , _______ ,
+                          KC_GRV  , XXXXXXX , XXXXXXX , XXXXXXX , XXXXXXX ,
                 _______         ,
     XXXXXXX   , MO(NumpadLayer) , _______
   ),
