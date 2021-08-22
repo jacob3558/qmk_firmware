@@ -10,22 +10,33 @@ static HSV FILTER_BREATH(HSV hsv, bool isBreathing){
 
     if(isBreathing){
         hsv.v = scale8(abs8(sin8(time) - 128) * 2, rgb_matrix_config.hsv.v);
-    } else {
-        if(hsv.v) hsv.v = rgb_matrix_config.hsv.v;
     }
     return hsv;
 }
 
-static HSV FILTER_VAL_BAND(HSV hsv, uint8_t position, bool isSatBanding, bool isVertical){
-    uint8_t time = scale16by8(g_rgb_timer, rgb_matrix_config.speed / 4);
-    if(isSatBanding){
+static HSV FILTER_HUE_BAND(HSV hsv, uint8_t position, bool isHueBanding, bool isVertical){
+    if(isHueBanding){
+        //hsv.h = scale8(h < 0 ? MOVINGHUE : CONSTANTHUE, hsv.h);
         if(isVertical){
-            int16_t v = hsv.v - abs(scale8(g_led_config.point[position].y, 228) + 28 - time) * 8;
-            hsv.v = scale8(v < 0 ? 0 : v, hsv.v);
+            uint8_t time = scale16by8(g_rgb_timer, rgb_matrix_config.speed / 12);
+            int16_t h = hsv.h - abs(scale8(g_led_config.point[position].y, 228) + 28 - time) * 8;
+            hsv.h = scale8(h < 0 ? hsv.h - 180 : hsv.h, hsv.h);
         } else {
-            int16_t v = hsv.v - abs(scale8(g_led_config.point[position].x, 228) + 28 - time) * 8;
-            hsv.v = scale8(v < 0 ? 0 : v, hsv.v);
+            uint8_t time = scale16by8(g_rgb_timer, rgb_matrix_config.speed / 4);
+            int16_t h = hsv.h - abs(scale8(g_led_config.point[position].x, 228) + 28 - time) * 8;
+            hsv.h = scale8(h < 0 ? hsv.h - 180 : hsv.h, hsv.h);
         }
+    }
+    return hsv;
+}
+
+static HSV FILTER_SPIRAL_VALUE(HSV hsv, uint8_t position, bool isSpiral){
+    if(isSpiral){
+        uint8_t time = scale16by8(g_rgb_timer, rgb_matrix_config.speed / 5);
+        int16_t dx   = g_led_config.point[position].x - k_rgb_matrix_center.x;
+        int16_t dy   = g_led_config.point[position].y - k_rgb_matrix_center.y;
+        uint8_t dist = sqrt16(dx * dx + dy * dy);
+        hsv.v = scale8(hsv.v + dist - time - atan2_8(dy, dx), hsv.v);
     }
     return hsv;
 }
@@ -62,50 +73,66 @@ bool layer_breathing(effect_params_t* params) {
             .v   = pgm_read_byte(&ledmap[currentLayer][m][2]),
         };
         bool isVertical = true;
-        bool isSpringGreen = hsv.h == 106 && hsv.s == 255 && hsv.v == 255;
+        bool isTurnedOff = !hsv.h && !hsv.s && !hsv.v;
+        bool isAzure = hsv.h == 132 && hsv.s == 102 && hsv.v == 255;
+        bool isBlue = hsv.h == 170 && hsv.s == 255 && hsv.v == 255;
+        bool isChartReuse = hsv.h == 64 && hsv.s == 255 && hsv.v == 255;
+        bool isCoral= hsv.h== 11 && hsv.s == 176 && hsv.v == 255;
         bool isCyan = hsv.h == 128 && hsv.s == 255 && hsv.v == 255;
         bool isGold = hsv.h == 36 && hsv.s == 255 && hsv.v == 255;
-        bool isAzure = hsv.h == 132 && hsv.s == 102 && hsv.v == 255;
+        bool isGoldenRod = hsv.h == 30 && hsv.s == 218 && hsv.v == 218;
+        bool isGreen = hsv.h == 85 && hsv.s == 255 && hsv.v == 255;
+        bool isMagenta = hsv.h == 213 && hsv.s == 255 && hsv.v == 255;
         bool isOrange= hsv.h== 28 && hsv.s == 255 && hsv.v == 255;
-        bool isChartReuse = hsv.h == 64 && hsv.s == 255 && hsv.v == 255;
+        bool isRed= hsv.h== 0 && hsv.s == 255 && hsv.v == 255;
+        bool isSpringGreen = hsv.h == 106 && hsv.s == 255 && hsv.v == 255;
+        bool isPink = hsv.h == 234 && hsv.s == 128 && hsv.v == 255;
+        bool isPurple = hsv.h == 191 && hsv.s == 255 && hsv.v == 255;
+        bool isWhite = hsv.h == 0 && hsv.s == 0 && hsv.v == 255;
 
-        //BREATH/VAL_BAND
-        //THEN USE REACTIVE CROSS
-        switch(currentLayer){
-            case MacbookLayer:
-                hsv = FILTER_VAL_BAND(hsv, m, isSpringGreen, !isVertical);
-                hsv = FILTER_BREATH(hsv, m==0);
-                hsv = FILTER_CROSS_SPLASH(hsv, m, isSpringGreen || m == 0);
-                break;
-            case WindowsLayer:
-                hsv = FILTER_VAL_BAND(hsv, m, isCyan, !isVertical);
-                hsv = FILTER_BREATH(hsv, m==0);
-                hsv = FILTER_CROSS_SPLASH(hsv, m, isCyan || m == 0);
-                break;
-            case GameLayer:
-                hsv = FILTER_BREATH(hsv, isGold || isOrange || m == 0);
-                hsv = FILTER_CROSS_SPLASH(hsv, m, isGold);
-                break;
-            case SymbolLayer:
-                hsv = FILTER_CROSS_SPLASH(hsv, m, true);
-                break;
-            case MouseLayer:
-            case ArrowsLayer:
-                hsv = FILTER_BREATH(hsv, isGold);
-                break;
-            case NumpadLayer:
-                hsv = FILTER_BREATH(hsv, isAzure);
-                break;
-            case FuncLayer:
-                hsv = FILTER_BREATH(hsv, isChartReuse);
-                break;
-            default:
-                if(hsv.v) hsv.v = rgb_matrix_config.hsv.v;
-                break;
+        //Sets the default value to the system value
+        if(hsv.v) hsv.v = rgb_matrix_config.hsv.v;
+        //BREATH/VAL_BAND THEN USE REACTIVE
+        if(hsv.v){
+            switch(currentLayer){
+                case MacbookLayer:
+                    hsv = FILTER_BREATH(hsv, m == 0 || isOrange);
+                    hsv = FILTER_SPIRAL_VALUE(hsv, m, isSpringGreen);
+                    hsv = FILTER_HUE_BAND(hsv, m, isGoldenRod, !isVertical);
+                    hsv = FILTER_CROSS_SPLASH(hsv, m, m == 0 || isSpringGreen || isWhite || isCyan || isMagenta);
+                    break;
+                case WindowsLayer:
+                    hsv = FILTER_BREATH(hsv, m == 0 || isCoral);
+                    hsv = FILTER_SPIRAL_VALUE(hsv, m, isCyan);
+                    hsv = FILTER_HUE_BAND(hsv, m, isGoldenRod, !isVertical);
+                    hsv = FILTER_CROSS_SPLASH(hsv, m, m == 0 || isCyan || isWhite || isGreen || isBlue);
+                    break;
+                case GameLayer:
+                    hsv = FILTER_BREATH(hsv, isGold || isOrange || m == 0);
+                    hsv = FILTER_CROSS_SPLASH(hsv, m, isGold);
+                    break;
+                case SymbolLayer:
+                    hsv = FILTER_BREATH(hsv, !isTurnedOff && !isPink && !isMagenta && !isRed);
+                    hsv = FILTER_CROSS_SPLASH(hsv, m, !isTurnedOff);
+                    break;
+                case MouseLayer:
+                case ArrowsLayer:
+                    hsv = FILTER_BREATH(hsv, isGold);
+                    hsv = FILTER_CROSS_SPLASH(hsv, m, isGold || isPink);
+                    break;
+                case NumpadLayer:
+                    hsv = FILTER_BREATH(hsv, isAzure);
+                    break;
+                case FuncLayer:
+                    hsv = FILTER_HUE_BAND(hsv, m, isChartReuse, !isVertical);
+                    hsv = FILTER_BREATH(hsv, isRed || isWhite || isPurple || isMagenta);
+                    break;
+                default:
+                    if(hsv.v) hsv.v = rgb_matrix_config.hsv.v;
+                    break;
+            }
         }
-
         RGB rgb = rgb_matrix_hsv_to_rgb(hsv);
-
         for (uint8_t i = led_min; i < led_max; i++) {
             RGB_MATRIX_TEST_LED_FLAGS();
             rgb_matrix_set_color(m, rgb.r, rgb.g, rgb.b);
