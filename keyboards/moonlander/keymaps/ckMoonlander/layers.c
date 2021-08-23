@@ -2,10 +2,10 @@ enum layers {
     MacbookLayer,
     WindowsLayer,
     GameLayer,
-    SymbolLayer,
-    MouseLayer,
     NumpadLayer,
-    FuncLayer,
+    MouseLayer,
+    SymbolLayer,
     ArrowsLayer,
+    FuncLayer,
 };
 

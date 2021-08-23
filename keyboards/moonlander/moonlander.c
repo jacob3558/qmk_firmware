@@ -212,28 +212,28 @@ layer_state_t layer_state_set_kb(layer_state_t state) {
         case 2:
             ML_LED_2(1);
             break;
-        //Symb
+        //Numpad
         case 3:
+            ML_LED_5(1);
             ML_LED_6(1);
             break;
         //Mouse
         case 4:
-            ML_LED_5(1);
-            break;
-        //Numpad
-        case 5:
+            ML_LED_4(1);
             ML_LED_5(1);
             ML_LED_6(1);
             break;
-        //Func
-        case 6:
-            ML_LED_3(1);
-            ML_LED_4(1);
+        //Symbols
+        case 5:
+            ML_LED_6(1);
             break;
-        //Arrw
+        //Arrows
+        case 6:
+            ML_LED_5(1);
+            break;
+        //Func
         case 7:
             ML_LED_4(1);
-            ML_LED_5(1);
             break;
         default:
             break;

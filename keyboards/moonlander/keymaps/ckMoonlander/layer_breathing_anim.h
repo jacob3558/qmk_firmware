@@ -75,13 +75,13 @@ bool layer_breathing(effect_params_t* params) {
         bool isVertical = true;
         bool isTurnedOff = !hsv.h && !hsv.s && !hsv.v;
         bool isAzure = hsv.h == 132 && hsv.s == 102 && hsv.v == 255;
-        bool isBlue = hsv.h == 170 && hsv.s == 255 && hsv.v == 255;
+        //bool isBlue = hsv.h == 170 && hsv.s == 255 && hsv.v == 255;
         bool isChartReuse = hsv.h == 64 && hsv.s == 255 && hsv.v == 255;
         bool isCoral= hsv.h== 11 && hsv.s == 176 && hsv.v == 255;
         bool isCyan = hsv.h == 128 && hsv.s == 255 && hsv.v == 255;
         bool isGold = hsv.h == 36 && hsv.s == 255 && hsv.v == 255;
         bool isGoldenRod = hsv.h == 30 && hsv.s == 218 && hsv.v == 218;
-        bool isGreen = hsv.h == 85 && hsv.s == 255 && hsv.v == 255;
+        //bool isGreen = hsv.h == 85 && hsv.s == 255 && hsv.v == 255;
         bool isMagenta = hsv.h == 213 && hsv.s == 255 && hsv.v == 255;
         bool isOrange= hsv.h== 28 && hsv.s == 255 && hsv.v == 255;
         bool isRed= hsv.h== 0 && hsv.s == 255 && hsv.v == 255;
@@ -99,16 +99,16 @@ bool layer_breathing(effect_params_t* params) {
                     hsv = FILTER_BREATH(hsv, m == 0 || isOrange);
                     hsv = FILTER_SPIRAL_VALUE(hsv, m, isSpringGreen);
                     hsv = FILTER_HUE_BAND(hsv, m, isGoldenRod, !isVertical);
-                    hsv = FILTER_CROSS_SPLASH(hsv, m, m == 0 || isSpringGreen || isWhite || isCyan || isMagenta);
+                    hsv = FILTER_CROSS_SPLASH(hsv, m, !isTurnedOff && !isCyan);
                     break;
                 case WindowsLayer:
                     hsv = FILTER_BREATH(hsv, m == 0 || isCoral);
                     hsv = FILTER_SPIRAL_VALUE(hsv, m, isCyan);
                     hsv = FILTER_HUE_BAND(hsv, m, isGoldenRod, !isVertical);
-                    hsv = FILTER_CROSS_SPLASH(hsv, m, m == 0 || isCyan || isWhite || isGreen || isBlue);
+                    hsv = FILTER_CROSS_SPLASH(hsv, m, !isTurnedOff && !isCyan);
                     break;
                 case GameLayer:
-                    hsv = FILTER_BREATH(hsv, isGold || isOrange || m == 0);
+                    hsv = FILTER_BREATH(hsv, isGold || m == 0);
                     hsv = FILTER_CROSS_SPLASH(hsv, m, isGold);
                     break;
                 case SymbolLayer:
