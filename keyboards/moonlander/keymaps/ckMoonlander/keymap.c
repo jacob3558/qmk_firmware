@@ -174,7 +174,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                 KC_UNDS , KC_BSLS , KC_LABK , KC_RABK , KC_QUES , _______ ,
                           KC_GRV  , XXXXXXX , XXXXXXX , XXXXXXX , XXXXXXX ,
                 _______ ,
-    _______   , XXXXXXX , XXXXXXX
+    _______   , XXXXXXX , _______
   ),
   [ArrowsLayer] = CK_LAYOUT(
     _______ , _______ , _______ , _______ , _______ , _______ , _______ ,
