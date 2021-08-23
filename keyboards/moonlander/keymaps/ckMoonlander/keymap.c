@@ -128,7 +128,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     _______ , KC_EXLM , KC_AT   , KC_HASH , KC_DLR  , KC_PERC , KC_CIRC ,
     _______ , XXXXXXX , KC_PIPE , KC_TILD , KC_AMPR , XXXXXXX , XXXXXXX ,
     _______ , XXXXXXX , XXXXXXX , XXXXXXX , XXXXXXX , XXXXXXX ,
-    _______ , XXXXXXX , XXXXXXX , KC_LALT , KC_LGUI ,
+    _______ , XXXXXXX , XXXXXXX , _______ , _______ ,
               _______ ,
     _______ , _______ , _______ ,
 
@@ -145,14 +145,14 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     _______       , XXXXXXX , XXXXXXX  , XXXXXXX , XXXXXXX , XXXXXXX , XXXXXXX ,
     KC_LCTL       , XXXXXXX , XXXXXXX  , XXXXXXX , XXXXXXX , XXXXXXX , XXXXXXX ,
     KC_LSFT       , XXXXXXX , XXXXXXX  , XXXXXXX , XXXXXXX , XXXXXXX ,
-    XXXXXXX , XXXXXXX , XXXXXXX  , KC_LALT , KC_LGUI ,
+    XXXXXXX       , XXXXXXX , XXXXXXX  , KC_LALT , KC_LGUI ,
                     XXXXXXX ,
     _______       , XXXXXXX , XXXXXXX  ,
 
     XXXXXXX         , XXXXXXX     , XXXXXXX         , XXXXXXX    , XXXXXXX        , XXXXXXX      , XXXXXXX ,
     XXXXXXX         , XXXXXXX     , KC_MS_WH_LEFT   , KC_MS_UP   , KC_MS_WH_RIGHT , XXXXXXX      , XXXXXXX ,
-    XXXXXXX         , KC_MS_WH_UP , KC_MS_LEFT      , KC_MS_DOWN , KC_MS_RIGHT    , KC_MS_ACCEL0 , XXXXXXX ,
-                      KC_MS_WH_DOWN, KC_MS_BTN1     , KC_MS_BTN3 , KC_MS_BTN2     , XXXXXXX      , XXXXXXX ,
+    XXXXXXX         , KC_MS_WH_UP , KC_MS_LEFT      , KC_MS_DOWN , KC_MS_RIGHT    , XXXXXXX      , XXXXXXX ,
+                      KC_MS_WH_DOWN, KC_MS_BTN1     , KC_MS_BTN3 , KC_MS_BTN2     , XXXXXXX      , KC_MS_ACCEL0 ,
     XXXXXXX         , XXXXXXX     , XXXXXXX         , XXXXXXX    , XXXXXXX        ,
                       XXXXXXX     ,
     MO(ArrowsLayer) , _______     , MO(NumpadLayer)

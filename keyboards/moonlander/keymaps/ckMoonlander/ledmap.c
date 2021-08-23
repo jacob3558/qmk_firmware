@@ -118,12 +118,12 @@ PROGMEM uint8_t ledmap[][DRIVER_LED_TOTAL][3] = {
         NONE    , NONE   , NONE    ,
         NONE    ,
 
-        NONE    , NONE   , NONE    , NONE , NONE ,
-        NONE    , NONE   , AZURE   , NONE , NONE ,
-        NONE    , RED    , GOLD    , BLUE , NONE ,
-        NONE    , GOLD   , GOLD    , BLUE , NONE ,
-        NONE    , RED    , GOLD    , BLUE , NONE ,
-        NONE    , NONE   , RED     , RED  ,
+        NONE    , NONE   , NONE    , AZURE , NONE ,
+        NONE    , NONE   , NONE    , NONE  , NONE ,
+        NONE    , RED    , GOLD    , BLUE  , NONE ,
+        NONE    , GOLD   , GOLD    , BLUE  , NONE ,
+        NONE    , RED    , GOLD    , BLUE  , NONE ,
+        NONE    , NONE   , RED     , RED   ,
         NONE    , NONE   , NONE    ,
         MAGENTA , YELLOW , MAGENTA ,
         NONE
