@@ -57,6 +57,7 @@ LAYOUT_moonlander( \
 #define M_SCRSHT LCTL(LGUI(LSFT(KC_4)))
 #define M_PRV_TAB LGUI(LSFT(KC_LBRC))
 #define M_NXT_TAB LGUI(LSFT(KC_RBRC))
+#define M_GUI_GRV LGUI(KC_GRV)
 
 #define W_SCRSHT LGUI(LSFT(KC_S))
 #define W_PRV_TAB LCTL(LSFT(KC_TAB))
@@ -170,9 +171,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
     KC_DELETE , XXXXXXX , XXXXXXX , XXXXXXX , XXXXXXX , XXXXXXX , KC_BSPC ,
     XXXXXXX   , XXXXXXX , KC_PLUS , KC_LPRN , KC_RPRN , XXXXXXX , XXXXXXX ,
-    XXXXXXX   , KC_MINS , KC_ASTR , KC_LBRC , KC_RBRC , KC_EQL  , XXXXXXX ,
-                KC_UNDS , KC_BSLS , KC_LABK , KC_RABK , KC_QUES , _______ ,
-                          KC_GRV  , XXXXXXX , XXXXXXX , XXXXXXX , XXXXXXX ,
+    M_GUI_GRV , KC_MINS , KC_ASTR , KC_LBRC , KC_RBRC , KC_EQL  , XXXXXXX ,
+    KC_UNDS   , KC_BSLS , KC_LABK , KC_RABK , KC_QUES , _______ ,
+    KC_GRV    , XXXXXXX , XXXXXXX , XXXXXXX , XXXXXXX ,
                 _______ ,
     _______   , XXXXXXX , _______
   ),
