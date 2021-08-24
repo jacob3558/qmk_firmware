@@ -182,7 +182,7 @@ PROGMEM uint8_t ledmap[][DRIVER_LED_TOTAL][3] = {
         NONE          , CORAL     , CORAL     , CYAN    , NONE      ,
         NONE          , ORANGE    , GREEN     , GREEN   , TURQUOISE ,
         NONE          , NONE      , ORANGE    , ORANGE  ,
-        RED           , NONE      , NONE      ,
+        RED           , NONE      , PINK      ,
         ORANGE   , NONE      , MAGENTA   ,
         NONE
     },
