@@ -280,8 +280,7 @@ static tap dance_state[4];
 uint8_t dance_step(qk_tap_dance_state_t *state);
 uint8_t dance_step(qk_tap_dance_state_t *state) {
     if (state->count == 1) {
-        if (!state->pressed) return SINGLE_TAP;
-        //if (state->interrupted || !state->pressed) return SINGLE_TAP;
+        if (!state->interrupted && !state->pressed) return SINGLE_TAP;
         else return SINGLE_HOLD;
     } else if (state->count == 2) {
         if (state->interrupted) return DOUBLE_SINGLE_TAP;
