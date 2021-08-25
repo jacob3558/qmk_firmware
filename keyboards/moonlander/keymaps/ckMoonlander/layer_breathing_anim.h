@@ -75,15 +75,15 @@ bool layer_breathing(effect_params_t* params) {
         bool isVertical = true;
         bool isTurnedOff = !hsv.h && !hsv.s && !hsv.v;
         bool isAzure = hsv.h == 132 && hsv.s == 102 && hsv.v == 255;
-        //bool isBlue = hsv.h == 170 && hsv.s == 255 && hsv.v == 255;
+        bool isBlue = hsv.h == 170 && hsv.s == 255 && hsv.v == 255;
         bool isChartReuse = hsv.h == 64 && hsv.s == 255 && hsv.v == 255;
-        bool isCoral= hsv.h== 11 && hsv.s == 176 && hsv.v == 255;
+        //bool isCoral= hsv.h== 11 && hsv.s == 176 && hsv.v == 255;
         bool isCyan = hsv.h == 128 && hsv.s == 255 && hsv.v == 255;
         bool isGold = hsv.h == 36 && hsv.s == 255 && hsv.v == 255;
         bool isGoldenRod = hsv.h == 30 && hsv.s == 218 && hsv.v == 218;
-        //bool isGreen = hsv.h == 85 && hsv.s == 255 && hsv.v == 255;
+        bool isGreen = hsv.h == 85 && hsv.s == 255 && hsv.v == 255;
         bool isMagenta = hsv.h == 213 && hsv.s == 255 && hsv.v == 255;
-        bool isOrange= hsv.h== 28 && hsv.s == 255 && hsv.v == 255;
+        //bool isOrange= hsv.h== 28 && hsv.s == 255 && hsv.v == 255;
         bool isRed= hsv.h== 0 && hsv.s == 255 && hsv.v == 255;
         bool isSpringGreen = hsv.h == 106 && hsv.s == 255 && hsv.v == 255;
         bool isPink = hsv.h == 234 && hsv.s == 128 && hsv.v == 255;
@@ -96,36 +96,35 @@ bool layer_breathing(effect_params_t* params) {
         if(hsv.v){
             switch(currentLayer){
                 case MacbookLayer:
-                    hsv = FILTER_BREATH(hsv, m == 0 || isOrange);
+                    hsv = FILTER_BREATH(hsv, isChartReuse);
                     hsv = FILTER_SPIRAL_VALUE(hsv, m, isSpringGreen);
                     hsv = FILTER_HUE_BAND(hsv, m, isGoldenRod, !isVertical);
-                    hsv = FILTER_CROSS_SPLASH(hsv, m, !isTurnedOff && !isCyan);
+                    hsv = FILTER_CROSS_SPLASH(hsv, m, !isTurnedOff && !isGreen);
                     break;
                 case WindowsLayer:
-                    hsv = FILTER_BREATH(hsv, m == 0 || isCoral);
+                    hsv = FILTER_BREATH(hsv, isRed);
                     hsv = FILTER_SPIRAL_VALUE(hsv, m, isCyan);
                     hsv = FILTER_HUE_BAND(hsv, m, isGoldenRod, !isVertical);
-                    hsv = FILTER_CROSS_SPLASH(hsv, m, !isTurnedOff && !isCyan);
+                    hsv = FILTER_CROSS_SPLASH(hsv, m, !isTurnedOff && !isBlue);
                     break;
                 case GameLayer:
                     hsv = FILTER_BREATH(hsv, isGold || m == 0);
                     hsv = FILTER_CROSS_SPLASH(hsv, m, isGold);
                     break;
-                case SymbolLayer:
-                    hsv = FILTER_BREATH(hsv, !isTurnedOff && !isPink && !isMagenta && !isRed);
-                    hsv = FILTER_CROSS_SPLASH(hsv, m, !isTurnedOff);
+                case NumpadLayer:
+                    hsv = FILTER_BREATH(hsv, isAzure);
                     break;
                 case MouseLayer:
                 case ArrowsLayer:
                     hsv = FILTER_BREATH(hsv, isGold);
                     hsv = FILTER_CROSS_SPLASH(hsv, m, isGold || isPink);
                     break;
-                case NumpadLayer:
-                    hsv = FILTER_BREATH(hsv, isAzure);
-                    break;
+                case SymbolLayer:
+                    hsv = FILTER_BREATH(hsv, !isTurnedOff && !isPink && !isMagenta && !isRed);
+                    hsv = FILTER_CROSS_SPLASH(hsv, m, !isTurnedOff);
                 case FuncLayer:
                     hsv = FILTER_HUE_BAND(hsv, m, isChartReuse, !isVertical);
-                    hsv = FILTER_BREATH(hsv, isRed || isWhite || isPurple || isMagenta);
+                    hsv = FILTER_BREATH(hsv, isRed || isWhite || isPurple);
                     break;
                 default:
                     if(hsv.v) hsv.v = rgb_matrix_config.hsv.v;
