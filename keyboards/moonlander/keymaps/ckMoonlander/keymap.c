@@ -144,20 +144,20 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     _______ , XXXXXXX , _______
   ),
   [MouseLayer] = CK_LAYOUT(
-    _______       , XXXXXXX , XXXXXXX  , XXXXXXX , XXXXXXX , XXXXXXX , XXXXXXX ,
-    _______       , XXXXXXX , XXXXXXX  , XXXXXXX , XXXXXXX , XXXXXXX , XXXXXXX ,
-    KC_LCTL       , XXXXXXX , XXXXXXX  , XXXXXXX , XXXXXXX , XXXXXXX , XXXXXXX ,
-    KC_LSFT       , XXXXXXX , XXXXXXX  , XXXXXXX , XXXXXXX , XXXXXXX ,
+    _______       , _______ , _______  , _______ , _______ , _______ , _______ ,
+    _______       , _______ , _______  , _______ , _______ , _______ , _______ ,
+    KC_LCTL       , _______ , _______  , _______ , _______ , _______ , _______ ,
+    KC_LSFT       , _______ , _______  , _______ , _______ , _______ ,
     XXXXXXX       , XXXXXXX , XXXXXXX  , KC_LALT , KC_LGUI ,
-                    XXXXXXX ,
-    _______       , XXXXXXX , XXXXXXX  ,
+                    _______ ,
+    _______       , _______ , _______  ,
 
-    XXXXXXX       , XXXXXXX     , XXXXXXX       , XXXXXXX    , XXXXXXX        , XXXXXXX      , XXXXXXX ,
-    XXXXXXX       , XXXXXXX     , KC_MS_WH_LEFT , KC_MS_UP   , KC_MS_WH_RIGHT , XXXXXXX      , XXXXXXX ,
-    XXXXXXX       , KC_MS_WH_UP , KC_MS_LEFT    , KC_MS_DOWN , KC_MS_RIGHT    , XXXXXXX      , XXXXXXX ,
+    _______       , _______     , _______       , _______    , _______        , _______      , _______ ,
+    _______       , XXXXXXX     , KC_MS_WH_LEFT , KC_MS_UP   , KC_MS_WH_RIGHT , XXXXXXX      , XXXXXXX ,
+    XXXXXXX       , KC_MS_WH_UP , KC_MS_LEFT    , KC_MS_DOWN , KC_MS_RIGHT    , XXXXXXX      , _______ ,
     KC_MS_WH_DOWN , KC_MS_BTN1  , KC_MS_BTN3    , KC_MS_BTN2 , XXXXXXX        , KC_MS_ACCEL0 ,
     XXXXXXX       , XXXXXXX     , XXXXXXX       , XXXXXXX    , XXXXXXX        ,
-                    XXXXXXX     ,
+                    _______     ,
     _______       , _______     , XXXXXXX
   ),
   [SymbolLayer] = CK_LAYOUT(
@@ -182,7 +182,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     XXXXXXX , XXXXXXX , XXXXXXX , KC_END  , XXXXXXX , XXXXXXX , XXXXXXX ,
     KC_LCTL , XXXXXXX , XXXXXXX , XXXXXXX , XXXXXXX , XXXXXXX , XXXXXXX ,
     KC_LSFT , XXXXXXX , XXXXXXX , XXXXXXX , XXXXXXX , XXXXXXX ,
-    XXXXXXX , XXXXXXX , XXXXXXX , XXXXXXX , KC_LALT ,
+    XXXXXXX , XXXXXXX , XXXXXXX , KC_LGUI , KC_LALT ,
     _______ ,
     _______ , _______ , _______ ,
 
