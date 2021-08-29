@@ -157,7 +157,7 @@ PROGMEM uint8_t ledmap[][DRIVER_LED_TOTAL][3] = {
         GOLDENROD , GOLDENROD  , MAGENTA ,
         NONE      ,
 
-        NONE      , NONE       , NONE    , AZURE , NONE ,
+        NONE      , NONE       , AZURE   , NONE  , NONE ,
         NONE      , NONE       , NONE    , NONE  , NONE ,
         NONE      , RED        , GOLD    , BLUE  , NONE ,
         NONE      , GOLD       , GOLD    , BLUE  , NONE ,
