@@ -20,17 +20,17 @@ static HSV FILTER_HUE_BAND(HSV hsv, uint8_t position, bool isHueBanding, bool is
         if(isVertical){
             uint8_t time = scale16by8(g_rgb_timer, rgb_matrix_config.speed / 12);
             int16_t h = hsv.h - abs(scale8(g_led_config.point[position].y, 228) + 28 - time) * 8;
-            hsv.h = scale8(h < 0 ? hsv.h - 180 : hsv.h, hsv.h);
+            hsv.h = scale8(h < 0 ? hsv.h + 180 : hsv.h, hsv.h);
         } else {
-            uint8_t time = scale16by8(g_rgb_timer, rgb_matrix_config.speed / 4);
+            uint8_t time = scale16by8(g_rgb_timer, rgb_matrix_config.speed / 8);
             int16_t h = hsv.h - abs(scale8(g_led_config.point[position].x, 228) + 28 - time) * 8;
-            hsv.h = scale8(h < 0 ? hsv.h - 180 : hsv.h, hsv.h);
+            hsv.h = scale8(h < 0 ? hsv.h + 180 : hsv.h, hsv.h);
         }
     }
     return hsv;
 }
 
-static HSV FILTER_SPIRAL_VALUE(HSV hsv, uint8_t position, bool isSpiral){
+static HSV FILTER_SPREAD(HSV hsv, uint8_t position, bool isSpiral){
     if(isSpiral){
         uint8_t time = scale16by8(g_rgb_timer, rgb_matrix_config.speed / 5);
         int16_t dx   = g_led_config.point[position].x - k_rgb_matrix_center.x;
@@ -62,6 +62,22 @@ static HSV FILTER_CROSS_SPLASH(HSV hsv, uint8_t position, bool isSplashing){
     return hsv;
 }
 
+static HSV FILTER_SPLASH(HSV hsv, uint8_t position, bool isSplashing){
+    uint8_t count = g_last_hit_tracker.count;
+    if(isSplashing){
+        for (uint8_t j = 0; j < count; j++) {
+            int16_t  dx   = g_led_config.point[position].x - g_last_hit_tracker.x[j];
+            int16_t  dy   = g_led_config.point[position].y - g_last_hit_tracker.y[j];
+            uint8_t  dist = sqrt16(dx * dx + dy * dy);
+            uint16_t tick = scale16by8(g_last_hit_tracker.tick[j], rgb_matrix_config.speed);
+            uint16_t effect = tick + dist * 8;
+            if (effect > 255) effect = 255;
+            hsv.v = qadd8(hsv.v, 255 - effect);
+        }
+    }
+    return hsv;
+}
+
 bool layer_breathing(effect_params_t* params) {
     RGB_MATRIX_USE_LIMITS(led_min, led_max);
 
@@ -75,13 +91,13 @@ bool layer_breathing(effect_params_t* params) {
         bool isVertical = true;
         bool isTurnedOff = !hsv.h && !hsv.s && !hsv.v;
         bool isAzure = hsv.h == 132 && hsv.s == 102 && hsv.v == 255;
-        bool isBlue = hsv.h == 170 && hsv.s == 255 && hsv.v == 255;
+        //bool isBlue = hsv.h == 170 && hsv.s == 255 && hsv.v == 255;
         bool isChartReuse = hsv.h == 64 && hsv.s == 255 && hsv.v == 255;
         //bool isCoral= hsv.h== 11 && hsv.s == 176 && hsv.v == 255;
         bool isCyan = hsv.h == 128 && hsv.s == 255 && hsv.v == 255;
         bool isGold = hsv.h == 36 && hsv.s == 255 && hsv.v == 255;
-        bool isGoldenRod = hsv.h == 30 && hsv.s == 218 && hsv.v == 218;
-        bool isGreen = hsv.h == 85 && hsv.s == 255 && hsv.v == 255;
+        //bool isGoldenRod = hsv.h == 30 && hsv.s == 218 && hsv.v == 218;
+        //bool isGreen = hsv.h == 85 && hsv.s == 255 && hsv.v == 255;
         bool isMagenta = hsv.h == 213 && hsv.s == 255 && hsv.v == 255;
         //bool isOrange= hsv.h== 28 && hsv.s == 255 && hsv.v == 255;
         bool isRed= hsv.h== 0 && hsv.s == 255 && hsv.v == 255;
@@ -97,15 +113,15 @@ bool layer_breathing(effect_params_t* params) {
             switch(currentLayer){
                 case MacbookLayer:
                     hsv = FILTER_BREATH(hsv, isChartReuse);
-                    hsv = FILTER_SPIRAL_VALUE(hsv, m, isSpringGreen);
-                    hsv = FILTER_HUE_BAND(hsv, m, isGoldenRod, !isVertical);
-                    hsv = FILTER_CROSS_SPLASH(hsv, m, !isTurnedOff && !isGreen);
+                    hsv = FILTER_SPREAD(hsv, m, isSpringGreen);
+                    hsv = FILTER_CROSS_SPLASH(hsv, m, !isTurnedOff && !isSpringGreen);
+                    hsv = FILTER_SPLASH(hsv, m, isSpringGreen);
                     break;
                 case WindowsLayer:
                     hsv = FILTER_BREATH(hsv, isRed);
-                    hsv = FILTER_SPIRAL_VALUE(hsv, m, isCyan);
-                    hsv = FILTER_HUE_BAND(hsv, m, isGoldenRod, !isVertical);
-                    hsv = FILTER_CROSS_SPLASH(hsv, m, !isTurnedOff && !isBlue);
+                    hsv = FILTER_SPREAD(hsv, m, isCyan);
+                    hsv = FILTER_CROSS_SPLASH(hsv, m, !isTurnedOff && !isCyan);
+                    hsv = FILTER_SPLASH(hsv, m, isCyan);
                     break;
                 case GameLayer:
                     hsv = FILTER_BREATH(hsv, isGold || m == 0);
