@@ -177,7 +177,7 @@ PROGMEM uint8_t ledmap[][DRIVER_LED_TOTAL][3] = {
     [SymbolLayer] = {
         PINK   , RED    , RED       , RED    , PINK      ,
         NONE   , CYAN   , NONE      , NONE   , NONE      ,
-        NONE   , CYAN   , TURQUOISE , NONE   , NONE      ,
+        NONE   , CYAN   , TURQUOISE , NONE   , PINK      ,
         NONE   , CYAN   , TURQUOISE , NONE   , RED       ,
         NONE   , CYAN   , TURQUOISE , NONE   , RED       ,
         NONE   , CYAN   , NONE      , NONE   ,
@@ -203,9 +203,9 @@ PROGMEM uint8_t ledmap[][DRIVER_LED_TOTAL][3] = {
     //NUMBERS   = NONE
     //ARROWS    = GOLD
     [ArrowsLayer] = {
-        NONE      , NONE      , CHARTREUSE , CHARTREUSE , NONE       ,
+        PINK      , NONE      , CHARTREUSE , CHARTREUSE , PINK       ,
         NONE      , NONE      , NONE       , NONE       , NONE       ,
-        NONE      , NONE      , NONE       , PINK       , NONE       ,
+        NONE      , NONE      , NONE       , PINK       , PINK       ,
         NONE      , PINK      , NONE       , NONE       , CHARTREUSE ,
         NONE      , NONE      , NONE       , NONE       , CHARTREUSE ,
         NONE      , NONE      , NONE       , NONE       ,
